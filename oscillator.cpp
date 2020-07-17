@@ -11,19 +11,20 @@
 
 #include <iostream>
 #include <cmath>
+#include "phasor.hpp"
 #include "sine.hpp"
 
-using namespace std;
-
 int main(void) {
-    // creation of Sine object, inherited from Phasor object
-    Sine ph1(96000.0);
-    // number of samples to generate
-    long int samples = 96;
+    double SR = 96000.0;
+    long int samples = 192;
     double amp = 1.0;
     double freq = 2000.0;
-    for (int i = 0; i < 96; i++) {
-        cout << ph1.gen(amp, freq) << endl;
+    Phasor phasor(SR);
+    Sine sinusoid(SR);
+    std::cout.precision(16);
+    for (int i = 0; i < samples; i++) {
+        std::cout << phasor.gen(amp, freq) << "\t" << 
+            sinusoid.gen(amp, freq) << std::endl;
     }
     return 0;
 }

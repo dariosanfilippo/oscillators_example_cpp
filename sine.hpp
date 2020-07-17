@@ -10,8 +10,6 @@
 
 # define TWOPI 2 * M_PI // 2π
 
-using namespace std;
-
 class Sine : public Phasor {
     // dataspace, private by default
     private:
@@ -28,17 +26,17 @@ class Sine : public Phasor {
 
 // construction
 Sine::Sine(double SR) : Phasor(SR) {
-    cout << "Construction of Sine object." << endl;
+    std::cout << "Construction of Sine object." << std::endl;
 }
 
 // destruction
 Sine::~Sine(void) {
-    cout << "Destruction of Sine object." << endl;
+    std::cout << "Destruction of Sine object." << std::endl;
 }
 
 // sample generation
 double Sine::gen(double amp, double freq) {
-    output = amp * sin(TWOPI * Phasor::gen(freq));
-    return output;
+    output = std::sin(Phasor::gen(TWOPI, freq));
+    return amp * output;
 }
 

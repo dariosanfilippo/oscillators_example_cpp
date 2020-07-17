@@ -7,8 +7,6 @@
 
 #pragma once // guard so that the header is included only once
 
-using namespace std;
-
 class Phasor {
     // dataspace, private by default
     private:
@@ -22,27 +20,27 @@ class Phasor {
         // default destructor
         ~Phasor(void);
         // generation function declaration
-        double gen(double freq);
+        double gen(double amp, double freq);
 };
 
 // construction
 Phasor::Phasor(double SR) {
     srate = SR;
     output = 0.0;
-    cout << "Construction of Phasor object." << endl;
+    std::cout << "Construction of Phasor object." << std::endl;
 }
 
 // destruction
 Phasor::~Phasor(void) {
-    cout << "Destruction of Phasor object." << endl;
+    std::cout << "Destruction of Phasor object." << std::endl;
 }
 
 // sample generation
-double Phasor::gen(double freq) {
+double Phasor::gen(double amp, double freq) {
     // recalculate incr at each sample for CPU-consumption consistency
     incr = freq / srate;
     // integrate frequency slope and wrap-around
-    output = output - floor(output) + incr;
-    return output;
+    output = output - std::floor(output) + incr;
+    return amp * output;
 }
 
