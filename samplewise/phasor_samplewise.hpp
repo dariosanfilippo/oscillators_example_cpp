@@ -43,7 +43,8 @@ double Phasor::gen(double A, double F) {
     // recalculate incr at each sample for CPU-consumption consistency
     incr = F / (double)srate;
     // integrate frequency slope and wrap-around
-    integrator = integrator - std::floor(integrator) + incr;
+    integrator = integrator + incr;
+    integrator = integrator - std::floor(integrator);
     return A * integrator;
 }
 
